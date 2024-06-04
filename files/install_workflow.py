@@ -12,12 +12,17 @@ def main():
     parser.add_argument("-w", "--workflow_path", help='Path to workflow file')
     parser.add_argument("-g", "--galaxy",
                         dest="galaxy_url",
+                        required=True,
                         help="Target Galaxy instance URL/IP address (required "
                              "if not defined in the tools list file)",)
     parser.add_argument("-a", "--apikey",
                         dest="api_key",
+                        required=True,
                         help="Galaxy admin user API key (required if not "
                              "defined in the tools list file)",)
+    parser.add_argument("-p", "--publish",
+                        action='store_true',
+                        help="Whether to publish this workflow for everyone.",)
     args = parser.parse_args()
 
     gi = galaxy.GalaxyInstance(url=args.galaxy_url, key=args.api_key)
@@ -26,7 +31,7 @@ def main():
         import_uuid = json.load(wf_file).get('uuid')
     existing_uuids = [d.get('latest_workflow_uuid') for d in gi.workflows.get_workflows()]
     if import_uuid not in existing_uuids:
-        gi.workflows.import_workflow_from_local_path(args.workflow_path)
+        gi.workflows.import_workflow_from_local_path(args.workflow_path, publish=args.publish)
     else:
         print("Workflow already exists.")
 
