@@ -22,11 +22,12 @@
     - "{{ galaxy_tools_workflows }}"
 
 - name: Install workflows
-  ansible.builtin.command: "{{ galaxy_tools_venv_dir }}/bin/python install_workflow.py -w '{{ item | basename }}' -a {{ galaxy_tools_workflow_api_key }} -g {{ galaxy_tools_galaxy_instance_url }}"
+  ansible.builtin.command: "{{ galaxy_tools_venv_dir }}/bin/python install_workflow.py -w '{{ item | basename }}' -a {{ galaxy_tools_workflow_api_key }} -g {{ galaxy_tools_galaxy_instance_url }} {{ galaxy_tools_galaxy_publish_workflows | ternary('-p', '') }}"
   args:
     chdir: "{{ galaxy_tools_base_dir }}"
   register: _install_result
   changed_when: "'Workflow already exists' not in _install_result.stdout"
+  ignore_errors: "{{ galaxy_tools_ignore_errors }}"
   with_items:
     - "{{ galaxy_tools_workflows }}"
 
