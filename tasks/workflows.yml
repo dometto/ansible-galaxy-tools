@@ -22,7 +22,7 @@
     - "{{ galaxy_tools_workflows }}"
 
 - name: Install workflows
-  ansible.builtin.command: "{{ galaxy_tools_venv_dir }}/bin/python install_workflow.py -w '{{ item | basename }}' -a {{ galaxy_tools_api_key }} -g {{ galaxy_tools_galaxy_instance_url }}"
+  ansible.builtin.command: "{{ galaxy_tools_venv_dir }}/bin/python install_workflow.py -w '{{ item | basename }}' -a {{ galaxy_tools_workflow_api_key }} -g {{ galaxy_tools_galaxy_instance_url }}"
   args:
     chdir: "{{ galaxy_tools_base_dir }}"
   register: _install_result
