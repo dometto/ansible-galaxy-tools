@@ -5,7 +5,7 @@
     name: _galaxy_tools_tool_list_tool
 
 - name: Install Tool Shed tools
-  ansible.builtin.command: '{{ galaxy_tools_venv_dir }}/bin/shed-tools install -y "{{ item | to_nice_yaml }}" -a "{{ galaxy_tools_api_key }}" -g "{{ galaxy_tools_galaxy_instance_url }}"'
+  ansible.builtin.command: '{{ galaxy_tools_venv_dir }}/bin/shed-tools install -y "{{ item | to_nice_yaml }}" -a "{{ galaxy_tools_tool_api_key }}" -g "{{ galaxy_tools_galaxy_instance_url }}"'
   register: _install_result
   changed_when: "'installed successfully' in _install_result.stderr"
   failed_when: ('Error installing' in _install_result.stderr) or ('Missing required' in _install_result.stderr) or (_install_result.rc != 0)
