@@ -6,14 +6,14 @@
       - ephemeris~={{ galaxy_tools_ephemeris_version }} # Pinned version should make sure ephemeris version matches what the role has been tested with
       - bioblend~={{ galaxy_tools_bioblend_version }}
     state: present
-    virtualenv: "{{ galaxy_tools_base_dir }}/venv"
+    virtualenv: "{{ galaxy_tools_venv_dir }}"
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
 
 - name: Copy galaxy_tools_data_managers_list in venv
-  copy: src="{{ galaxy_tools_data_managers_list }}" dest="{{ galaxy_tools_base_dir }}/venv/bin/data_managers_list.yaml"
+  copy: src="{{ galaxy_tools_data_managers_list }}" dest="{{ galaxy_tools_venv_dir }}/bin/data_managers_list.yaml"
 
 - name: Install Data-managers and Genomes
-  command: '{{ galaxy_tools_base_dir }}/venv/bin/run-data-managers -a "{{ galaxy_tools_api_key }}" -g "{{ galaxy_tools_galaxy_instance_url }}" --config "{{ galaxy_tools_base_dir }}/venv/bin/data_managers_list.yaml" '
+  command: '{{ galaxy_tools_venv_dir }}/bin/run-data-managers -a "{{ galaxy_tools_api_key }}" -g "{{ galaxy_tools_galaxy_instance_url }}" --config "{{ galaxy_tools_venv_dir }}/bin/data_managers_list.yaml" '
   register: install_result
   changed_when: "install_result.stderr.find('Failed jobs: 0') != -1"
   failed_when: "(install_result.stderr.find('Tool not found or not accessible') != -1) or not(install_result.stderr.find('Failed jobs: 0') != -1) or (install_result.rc != 0)"

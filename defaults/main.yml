@@ -28,6 +28,9 @@ galaxy_tools_ignore_errors: true
 # A system path from where this role will be run
 galaxy_tools_base_dir: /tmp
 
+# The location of the venv that should be used to install pip dependencies
+galaxy_tools_venv_dir: "{{ galaxy_tools_base_dir }}/venv"
+
 # Set this to yes and change galaxy_tools_api_key to a string to create a predefined api key for the bootstrap user.
 galaxy_tools_admin_user_preset_api_key: no
 
@@ -47,10 +50,7 @@ galaxy_tools_workflows: []
 galaxy_user_name: galaxy
 
 # A path where Galaxy is installed
-galaxy_server_dir: /mnt/galaxy/galaxy-app
-
-# A system path where a virtualenv for Galaxy is installed
-galaxy_venv_dir: "{{ galaxy_server_dir }}/.venv"
+galaxy_server_dir: /srv/galaxy/
 
 # A system path for Galaxy's main configuration file
 galaxy_config_file: "{{ galaxy_server_dir }}/config/galaxy.ini"
