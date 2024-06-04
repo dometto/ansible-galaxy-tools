@@ -10,17 +10,27 @@
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
 
 - name: Place the tool management script
-  copy: src=install_workflow.py dest={{ galaxy_tools_base_dir }}/install_workflow.py
+  ansible.builtin.copy: 
+    src: install_workflow.py
+    dest: "{{ galaxy_tools_base_dir }}/install_workflow.py"
 
 - name: Copy workflows
-  copy: src={{ item }} dest={{ galaxy_tools_base_dir }}/{{ item | basename }}
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ galaxy_tools_base_dir }}/{{ item | basename }}"
   with_items:
     - "{{ galaxy_tools_workflows }}"
 
 - name: Install workflows
-  command: chdir={{ galaxy_tools_base_dir }} {{ galaxy_tools_venv_dir }}/bin/python install_workflow.py -w "{{ item | basename }}" -a {{ galaxy_tools_api_key }} -g {{ galaxy_tools_galaxy_instance_url }}
+  ansible.builtin.command: "{{ galaxy_tools_venv_dir }}/bin/python install_workflow.py -w '{{ item | basename }}' -a {{ galaxy_tools_api_key }} -g {{ galaxy_tools_galaxy_instance_url }}"
+  args:
+    chdir: "{{ galaxy_tools_base_dir }}"
+  register: _install_result
+  changed_when: "'Workflow already exists' not in _install_result.stdout"
   with_items:
     - "{{ galaxy_tools_workflows }}"
 
 - name: Remove workflow script
-  file: dest={{ galaxy_tools_base_dir }}/install_workflow.py state=absent
+  ansible.builtin.file:
+    dest: "{{ galaxy_tools_base_dir }}/install_workflow.py"
+    state: absent

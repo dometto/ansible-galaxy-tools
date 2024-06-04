@@ -27,6 +27,8 @@ def main():
     existing_uuids = [d.get('latest_workflow_uuid') for d in gi.workflows.get_workflows()]
     if import_uuid not in existing_uuids:
         gi.workflows.import_workflow_from_local_path(args.workflow_path)
+    else:
+        print("Workflow already exists.")
 
 if __name__ == '__main__':
     main()
