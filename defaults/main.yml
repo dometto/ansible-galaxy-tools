@@ -42,6 +42,9 @@ galaxy_tools_workflow_api_key: "{{ galaxy_tools_api_key }}"
 
 galaxy_tools_workflows: []
 
+# Whether to install dependencies for each tool by default
+galaxy_tools_install_dependencies: true
+
 # Whether to publish added workflows
 galaxy_tools_galaxy_publish_workflows: true
 
