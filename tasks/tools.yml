@@ -6,7 +6,7 @@
       - ephemeris~={{ galaxy_tools_ephemeris_version }}  # Pinned version should make sure ephemeris version matches what the role has been tested with
       - bioblend~={{ galaxy_tools_bioblend_verison }}
     state: present
-    virtualenv: "{{ galaxy_tools_base_dir }}/venv"
+    virtualenv: "{{ galaxy_tools_venv_dir }}"
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
 
 - include_tasks: install_tool_list.yml
