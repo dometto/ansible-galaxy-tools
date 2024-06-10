@@ -1,0 +1,38 @@
+---
+driver:
+  name: docker
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      remote_tmp: /tmp
+  env:
+    bootstrap_key: ${BOOTSTRAP_KEY}
+platforms:
+  - name: galaxy-tool-test
+    image: galaxy/galaxy-min:24.0.2
+    # override default sleep loop, use Dockerfile CMD
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    privileged: true
+    dockerfile: ../_common/Dockerfile.j2
+    pre_build_image: false
+    bootstrap_key: ${BOOTSTRAP_KEY}
+    published_ports:
+      - 8080/tcp
+role_name_check: 1
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    # - idempotence # disable idempotence for delete_bootstrap_user test
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
