@@ -6,3 +6,4 @@ RUN apt update && apt install -y \
 USER galaxy
 
 RUN sed -i 's/galaxy:/galaxy:\n    bootstrap_admin_api_key: {{ item.bootstrap_key }}/' /galaxy/server/config/galaxy.yml
+RUN sed -i 's/galaxy:/galaxy:\n    allow_user_deletion: true/' /galaxy/server/config/galaxy.yml

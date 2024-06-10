@@ -1,18 +1,10 @@
 ---
 - name: Converge
   hosts: all
-  pre_tasks:
-    - name: Wait for galaxy server to come up
-      ansible.builtin.uri:
-        url: "http://localhost:8080/api/version"
-      register: galaxy_service_live
-      until: "galaxy_service_live.status == 200"
-      retries: 30
-      delay: 5
   roles:
     - role: ansible-galaxy-tools
       vars:
-        galaxy_tools_api_key: "{{ lookup('env', 'bootstrap_key') }}"
+        galaxy_tools_api_key: bla
         galaxy_tools_venv_dir: /galaxy/server/.venv
         galaxy_tools_install_tools: true
         galaxy_tools_install_workflows: true
@@ -20,5 +12,3 @@
         galaxy_tools_tool_list_files: ../_testfiles/tool_list.yaml.sample
         galaxy_tools_workflows: ../_testfiles/sample-workflow.ga
         galaxy_tools_ignore_errors: false
-        galaxy_create_bootstrap_user: true
-        galaxy_delete_bootstrap_user: false
