@@ -15,6 +15,9 @@
   changed_when: "'installed successfully' in _install_result.stderr and ('repository '~item.name~' already installed') not in _install_result.stderr"
   failed_when: ('Error installing' in _install_result.stderr) or ('Missing required' in _install_result.stderr) or (_install_result.rc != 0)
   ignore_errors: "{{ galaxy_tools_ignore_errors }}"
+  retries: "{{ galaxy_tools_install_retries }}"
+  delay: "{{ galaxy_tools_install_retry_delay }}"
+  until: _install_result is not failed
   notify:
     - ansible-galaxy-tools restart galaxy
   with_items:

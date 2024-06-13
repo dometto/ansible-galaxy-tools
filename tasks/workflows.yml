@@ -36,6 +36,9 @@
   args:
     chdir: "{{ galaxy_tools_base_dir }}"
   register: _install_result
+  retries: "{{ galaxy_tools_install_retries }}"
+  delay: "{{ galaxy_tools_install_retry_delay }}"
+  until: _install_result is not failed
   changed_when: "'Workflow already exists' not in _install_result.stdout"
   ignore_errors: "{{ galaxy_tools_ignore_errors }}"
   with_items:

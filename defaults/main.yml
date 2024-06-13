@@ -60,6 +60,10 @@ galaxy_runs_in_docker: no
 # galaxy_docker_container_id is either the container id or name shown by `docker ps`
 galaxy_docker_container_id: galaxy
 
+# How often to try reinstalling a tool or workflow (useful for instance because of connection issues)
+galaxy_tools_install_retries: 2
+galaxy_tools_install_retry_delay: 5 # Delay time between retries
+
 # galaxy_create_bootstrap_user can be set to true to create a new admin user.
 # This is necessary when the main api key is derived from the `bootstrap_admin_api_key` option in galaxy.yml
 # Such a bootstrap admin key allows installing tools and creating users, but not installing workflows (which are tied to a specific user).
