@@ -9,7 +9,7 @@
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
 
 - name: Create bootstrap user
-  when: galaxy_create_bootstrap_user
+  when: galaxy_tools_create_bootstrap_user
   ansible.builtin.include_tasks: bootstrap.yml
 
 - name: Place the tool management script
@@ -45,13 +45,13 @@
     - "{{ galaxy_tools_workflows }}"
 
 - name: Delete the bootstrapped admin user
-  when: galaxy_create_bootstrap_user and galaxy_delete_bootstrap_user
+  when: galaxy_tools_create_bootstrap_user and galaxy_tools_delete_bootstrap_user
   ansible.builtin.command:
     cmd: >
       {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
       -d
       -a {{ galaxy_tools_api_key }}
       -g {{ galaxy_tools_galaxy_instance_url }}
-      -e {{ galaxy_bootstrap_user_email }}
+      -e {{ galaxy_tools_bootstrap_user_email }}
   register: _galaxy_delete_user
   changed_when: '"Deleted user" in _galaxy_delete_user.stdout'

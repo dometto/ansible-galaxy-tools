@@ -10,16 +10,16 @@
     {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
     -a {{ galaxy_tools_api_key }}
     -g {{ galaxy_tools_galaxy_instance_url }}
-    -e {{ galaxy_bootstrap_user_email }}
-    {% if galaxy_bootstrap_user_remote %}
+    -e {{ galaxy_tools_bootstrap_user_email }}
+    {% if galaxy_tools_bootstrap_user_remote %}
     -r
     {% else %}
-    -u {{ galaxy_bootstrap_user_username }}
+    -u {{ galaxy_tools_bootstrap_user_username }}
     -p {{ lookup('ansible.builtin.password', '/dev/null', chars=['ascii_lowercase', 'digits'], length=50) }}
     {% endif %}
-  register: _galaxy_create_bootstrap_user
-  changed_when: '"Created user" in _galaxy_create_bootstrap_user.stdout'
+  register: _galaxy_tools_create_bootstrap_user
+  changed_when: '"Created user" in _galaxy_tools_create_bootstrap_user.stdout'
 
 - name: Set API key to use for workflows
   ansible.builtin.set_fact:
-    galaxy_tools_bootstrap_user_api_key: "{{ _galaxy_create_bootstrap_user.stdout_lines[-1] }}"
+    galaxy_tools_bootstrap_user_api_key: "{{ _galaxy_tools_create_bootstrap_user.stdout_lines[-1] }}"

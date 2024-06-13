@@ -20,5 +20,5 @@
         galaxy_tools_tool_list_files: ../_testfiles/tool_list.yaml.sample
         galaxy_tools_workflows: ../_testfiles/sample-workflow.ga
         galaxy_tools_ignore_errors: false
-        galaxy_create_bootstrap_user: true
-        galaxy_delete_bootstrap_user: false
+        galaxy_tools_create_bootstrap_user: true
+        galaxy_tools_delete_bootstrap_user: false
