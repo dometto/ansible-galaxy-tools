@@ -20,6 +20,10 @@
   changed_when: "install_result.stderr.find('Failed jobs: 0') != -1"
   failed_when: "(install_result.stderr.find('Tool not found or not accessible') != -1) or not(install_result.stderr.find('Failed jobs: 0') != -1) or (install_result.rc != 0)"
   ignore_errors: "{{ galaxy_tools_ignore_errors }}"
+  register: _install_result
+  retries: "{{ galaxy_tools_install_retries }}"
+  delay: "{{ galaxy_tools_install_retry_delay }}"
+  until: _install_result is not failed
   notify:
     - ansible-galaxy-tools restart galaxy
     
