@@ -1,5 +1,9 @@
 - name: Stop Galaxy
+<<<<<<< HEAD
   shell: "{{ galaxy_tools_galaxy_server_dir }}/run.sh --pid-file={{ galaxy_tools_pid_file_name }} --log-file={{ galaxy_tools_log_file_name }} --stop-daemon"
+=======
+  shell: "{{ galaxy_server_dir }}/run.sh --pid-file={{ galaxy_tools_pid_file_name }} --log-file={{ galaxy_tools_log_file_name }} --stop-daemon"
+>>>>>>> 21c043a (Cleanup: yes/no -> true/false)
   ignore_errors: true
 
 - name: Wait for Galaxy to stop
