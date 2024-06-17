@@ -7,7 +7,7 @@
 
 - name: Create bootstrap user and api key
   ansible.builtin.command: >
-    {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
+    {{ galaxy_tools_venv_dir }}/bin/python {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
     -a {{ galaxy_tools_api_key }}
     -g {{ galaxy_tools_galaxy_instance_url }}
     -e {{ galaxy_tools_bootstrap_user_email }}

@@ -48,7 +48,7 @@
   when: galaxy_tools_create_bootstrap_user and galaxy_tools_delete_bootstrap_user
   ansible.builtin.command:
     cmd: >
-      {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
+      {{ galaxy_tools_venv_dir }}/bin/python {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
       -d
       -a {{ galaxy_tools_api_key }}
       -g {{ galaxy_tools_galaxy_instance_url }}
