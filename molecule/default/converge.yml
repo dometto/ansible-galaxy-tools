@@ -10,7 +10,7 @@
       retries: 30
       delay: 5
   roles:
-    - role: ansible-galaxy-tools
+    - role: galaxyproject.galaxy_tools
       vars:
         galaxy_tools_api_key: "{{ lookup('env', 'bootstrap_key') }}"
         galaxy_tools_venv_dir: /galaxy/server/.venv

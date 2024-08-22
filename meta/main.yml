@@ -1,14 +1,19 @@
 ---
 galaxy_info:
+  role_name: galaxy_tools
+  namespace: galaxyproject
   author: The Galaxy Project
-  description: Automate installation of tools into Galaxy.
+  description: Automate installation of tools, workflows, and datamangers in Galaxy.
   company: The Galaxy Project
   license: MIT
-  min_ansible_version: 2.1.2.0
+  min_ansible_version: "2.9"
   platforms:
-  - name: Ubuntu
-    versions:
-    - trusty
-  categories:
-  - system
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+        - focal
+        - jammy
+        - noble
 dependencies: []
