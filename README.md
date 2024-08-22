@@ -1,4 +1,5 @@
 [![Molecule tests](https://github.com/dometto/ansible-galaxy-tools/actions/workflows/molecule.yml/badge.svg)](https://github.com/dometto/ansible-galaxy-tools/actions/workflows/molecule.yml)
+[![Ansible Lint](https://github.com/dometto/ansible-galaxy-tools/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/dometto/ansible-galaxy-tools/actions/workflows/ansible-lint.yml)
 
 This Ansible role is for automated provisioning of Galaxy instances. It can:
 
