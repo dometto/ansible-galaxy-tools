@@ -20,6 +20,10 @@
   register: _galaxy_tools_create_bootstrap_user
   changed_when: '"Created user" in _galaxy_tools_create_bootstrap_user.stdout'
 
-- name: Set API key to use for workflows
+- name: Set API key to use for operations
   ansible.builtin.set_fact:
-    galaxy_tools_bootstrap_user_api_key: "{{ _galaxy_tools_create_bootstrap_user.stdout_lines[-1] }}"
+    galaxy_tools_ops_key: "{{ _galaxy_tools_create_bootstrap_user.stdout_lines[-1] }}"
+
+- name: Set email to use for operations
+  ansible.builtin.set_fact:
+    galaxy_tools_admin_user_email: "{{ galaxy_tools_bootstrap_user_email }}"
