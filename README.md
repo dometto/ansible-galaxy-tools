@@ -67,7 +67,7 @@ roles:
   - role: galaxy-tools
     vars:
       ...
-      galaxy_tools_restart_handler: restart-galaxy
+      galaxy_tools_restart_handler: Restart-galaxy
 
 handlers:
   - name: Restart-Galaxy
