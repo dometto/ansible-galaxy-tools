@@ -1,14 +1,14 @@
 ---
 
-galaxy_tools_install_tools: yes
-galaxy_tools_install_data_managers: no 
-galaxy_tools_install_workflows: no
+galaxy_tools_install_tools: true
+galaxy_tools_install_data_managers: false 
+galaxy_tools_install_workflows: false
 galaxy_tools_bioblend_version: 1.3
 galaxy_tools_ephemeris_version: 0.10
 
 # If enabled, the restart handler will attempt to restart Galaxy after tool
 # installation, assuming Galaxy is controlled by run.sh, docker or supervisor.
-galaxy_restart_handler_enabled: no
+galaxy_restart_handler_enabled: false
 
 # A URL or an IP address for the Galaxy instance where the tools are to be
 # installed
@@ -18,9 +18,7 @@ galaxy_tools_galaxy_instance_url: http://127.0.0.1:8080
 # file for more about the format requirements of this file. The file names must be unique.
 galaxy_tools_tool_list_files: [ "tool_list.yaml" ]
 
-# A yml file that lists the data-managers and genomes to be installed
-# see `files/tool_list.yaml.sample`
-galaxy_tools_data_managers_list: "run_data_managers.yaml"
+
 
 # should the playbook continue when errors are found
 galaxy_tools_ignore_errors: true
@@ -73,3 +71,5 @@ galaxy_tools_delete_bootstrap_user: true # whether to delete the user after work
 galaxy_tools_bootstrap_user_remote: false # set to true when the galaxy instance uses remote users (with an external authentication mechanism)
 galaxy_tools_bootstrap_user_email: bootstrap_admin@galaxy
 galaxy_tools_bootstrap_user_username: bootstrap_admin
+
+galaxy_tools_admin_user_email: ''
