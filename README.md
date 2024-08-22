@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/galaxyproject/ansible-galaxy-tools.svg?branch=master)](https://travis-ci.org/galaxyproject/ansible-galaxy-tools)
+[![Molecule tests](https://github.com/dometto/ansible-galaxy-tools/actions/workflows/molecule.yml/badge.svg)](https://github.com/dometto/ansible-galaxy-tools/actions/workflows/molecule.yml)
 
 This Ansible role is for automated provisioning of Galaxy instances. It can:
 
