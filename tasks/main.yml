@@ -4,10 +4,19 @@
     msg: Installed ansible version {{ ansible_version.full }}, but ansible version > 2.1.1.1 required
   when: ansible_version.full is version('2.9', '<')
 
-- name: Check there is a valid way of acquiring an API key
+- name: Check if there is a valid way of acquiring an API key
   ansible.builtin.fail:
     msg: No API key for a Galaxy admin, or a boostrapping API key, was provided. Please see the docs for this role
   when: not galaxy_tools_api_key
+
+- name: Create virtualenv and install dependencies
+  ansible.builtin.pip:
+    name: # Pinned version should make sure ephemeris version matches what the role has been tested with
+      - ephemeris~={{ galaxy_tools_ephemeris_version }}
+      - bioblend~={{ galaxy_tools_bioblend_version }}
+    state: present
+    virtualenv: "{{ galaxy_tools_venv_dir }}"
+    virtualenv_command: "{{ pip_virtualenv_command | default('virtualenv') }}"
 
 - name: Create bootstrap user
   when: galaxy_tools_create_bootstrap_user
